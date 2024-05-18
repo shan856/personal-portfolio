@@ -20,7 +20,7 @@ export const Footer = () => {
           <a  target="_blank" rel="noreferrer noopener" href="https://www.facebook.com/shashank.salian.79"><img src={navIcon2} alt="" /></a>
           <a  target="_blank" rel="noreferrer noopener" href="https://www.instagram.com/_shashank.salian_/"><img src={navIcon3} alt="" /></a>
         </div>
-            <p>Copyright 2022. All Rights Reserved</p>
+            <p>All Rights Reserved</p>
           </Col>
         </Row>
       </Container>
