@@ -556,17 +556,26 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   z-index: -4;
 }
 
-/************ Projects Css ************/
-.contact {
-  /* background: linear-gradient(90.21deg, #8B4BD1 -5.91%, #430A62 111.58%); */
+/************ Projects Css ************/.contact {
+  /* Your existing styles */
   padding: 60px 0 200px 0;
   position: relative;
-  background-image: url('https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/conatact-bg.jpg') ;
-  background-size: cover; /* Ensure the image covers the whole area */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-image: url('https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/conatact-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
+  /* Responsive background image styles */
+  @media (max-width: 768px) {
+    background-size: contain;
+  }
 
+  @media (max-width: 576px) {
+    padding: 40px 0 150px 0; /* Adjust padding for smaller screens */
+  }
+
+  /* Additional media queries for other screen sizes */
+  /* For example, you can add more media queries for tablets, larger phones, etc. */
 }
 
 .contact img {
