@@ -556,27 +556,41 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   z-index: -4;
 }
 
-/************ Projects Css ************/.contact {
-  /* Your existing styles */
+/************ Projects Css ************/
+.contact {
   padding: 60px 0 200px 0;
   position: relative;
-  background-image: url('https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/conatact-bg.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
-  /* Responsive background image styles */
-  @media (max-width: 768px) {
-    background-size: contain;
-  }
-
-  @media (max-width: 576px) {
-    padding: 40px 0 150px 0; /* Adjust padding for smaller screens */
-  }
-
-  /* Additional media queries for other screen sizes */
-  /* For example, you can add more media queries for tablets, larger phones, etc. */
 }
+
+.contact.bg-1 {
+  background-image: url('https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/conatact-bg.jpg');
+}
+
+.contact.bg-2 {
+  background-image: url('https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contactt.png');
+}
+
+/* Responsive background image styles */
+@media (max-width: 768px) {
+  .contact.bg-1,
+  .contact.bg-2 {
+    background-image: url("./assets/img/contactt.png");
+    filter: saturate(160%);
+  }
+}
+
+@media (max-width: 576px) {
+  .contact.bg-1,
+  .contact.bg-2 {
+    background-image: url("./assets/img/contactt.png");
+    filter: saturate(160%);
+    /* padding: 40px 0 150px 0; Adjust padding for smaller screens */
+  }
+}
+
 
 .contact img {
   width: 92%;

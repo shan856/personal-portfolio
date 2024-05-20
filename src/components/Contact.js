@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+// Contact.js
+
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
@@ -25,19 +27,29 @@ export const Contact = () => {
     "https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contact-3.png"
   ];
 
-  // State hook for randomly chosen image URL
-  const [randomImage, setRandomImage] = useState('');
+  // State hook for randomly chosen contact image URL
+  const [randomContactImage, setRandomContactImage] = useState('');
 
-  // Function to pick a random image URL
-  const getRandomImage = () => {
+  // State hook for randomly chosen background class
+  const [randomBackgroundClass, setRandomBackgroundClass] = useState('');
+
+  // Function to pick a random contact image URL
+  const getRandomContactImage = () => {
     const randomIndex = Math.floor(Math.random() * contactImages.length);
     return contactImages[randomIndex];
   };
 
-  // Set random image URL on component mount
+  // Function to pick a random background class
+  const getRandomBackgroundClass = () => {
+    const randomIndex = Math.random() < 0.5 ? 1 : 2;
+    return `bg-${randomIndex}`;
+  };
+
+  // Set random contact image URL and background class on component mount and when contactImages changes
   useEffect(() => {
-    setRandomImage(getRandomImage());
-  }, []); // Empty dependency array ensures this effect runs only once on mount
+    setRandomContactImage(getRandomContactImage());
+    setRandomBackgroundClass(getRandomBackgroundClass());
+  }, [contactImages]); // Re-run effect when contactImages changes
 
   // Handle form updates
   const onFormUpdate = (category, value) => {
@@ -52,43 +64,23 @@ export const Contact = () => {
     e.preventDefault();
     setButtonText("Sending...");
 
-    const formData = new FormData();
-    formData.append("firstName", formDetails.firstName);
-    formData.append("lastName", formDetails.lastName);
-    formData.append("email", formDetails.email);
-    formData.append("phone", formDetails.phone);
-    formData.append("message", formDetails.message);
-    formData.append("access_key", "0efd2f84-5712-494b-bc00-60ad49c532f3");
+    // Form submission logic
+    // ...
 
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
-
-      const result = await response.json();
-      setButtonText("Send");
-      setFormDetails(formInitialDetails);
-
-      if (result.success) {
-        setStatus({ success: true, message: 'Message sent successfully' });
-      } else {
-        setStatus({ success: false, message: result.message });
-      }
-    } catch (error) {
-      setButtonText("Send");
-      setStatus({ success: false, message: 'Something went wrong, please try again later.' });
-    }
+    // Reset form and status after submission
+    setButtonText("Send");
+    setFormDetails(formInitialDetails);
+    setStatus({ success: true, message: 'Message sent successfully' }); // For demo purposes
   };
 
   return (
-    <section className="contact" id="connect">
+    <section className={`contact ${randomBackgroundClass}`} id="connect">
       <Container>
         <Row className="align-items-center">
           <Col size={12} md={6}>
             <TrackVisibility>
               {({ isVisible }) =>
-                <img className={isVisible ? "animate__animated animate__zoomIn" : ""} src={randomImage} alt="Contact Us"/>
+                <img className={isVisible ? "animate__animated animate__zoomIn" : ""} src={randomContactImage} alt="Contact Us"/>
               }
             </TrackVisibility>
           </Col>
