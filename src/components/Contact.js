@@ -43,6 +43,7 @@ export const Contact = () => {
   const getRandomBackgroundClass = () => {
     const randomIndex = Math.random() < 0.5 ? 1 : 2;
     return `bg-${randomIndex}`;
+   
   };
 
   // Set random contact image URL and background class on component mount and when contactImages changes
@@ -58,6 +59,7 @@ export const Contact = () => {
       [category]: value
     });
   };
+  
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -74,8 +76,10 @@ export const Contact = () => {
   };
 
   return (
+ 
     <section className={`contact ${randomBackgroundClass}`} id="connect">
       <Container>
+
         <Row className="align-items-center">
           <Col size={12} md={6}>
             <TrackVisibility>
