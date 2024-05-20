@@ -285,7 +285,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('./assets/img/banner-bg.png');
+  background-image: url('https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/banner-bg.png');
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -558,12 +558,22 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 
 /************ Projects Css ************/
 .contact {
-  background: linear-gradient(90.21deg, #8B4BD1 -5.91%, #430A62 111.58%);
+  /* background: linear-gradient(90.21deg, #8B4BD1 -5.91%, #430A62 111.58%); */
   padding: 60px 0 200px 0;
+  position: relative;
+  background-image: url('https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/conatact-bg.jpg') ;
+  background-size: cover; /* Ensure the image covers the whole area */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+
+
 }
 
 .contact img {
   width: 92%;
+  border-radius:59%; 
+    animation: updown 3s linear infinite;
+  /* mix-blend-mode:luminosity; */
 }
 
 .contact h2 {

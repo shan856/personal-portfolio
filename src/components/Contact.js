@@ -1,21 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import contactImg from "../assets/img/contact-img.svg";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 
 export const Contact = () => {
+  // Initial form state
   const formInitialDetails = {
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
     message: ''
-  }
+  };
+
+  // State hooks for form details, button text, and status message
   const [formDetails, setFormDetails] = useState(formInitialDetails);
   const [buttonText, setButtonText] = useState('Send');
   const [status, setStatus] = useState({});
 
+  // Array of contact image URLs
+  const contactImages = [
+    "https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contact-1.png",
+    "https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contact-2.png",
+    "https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contact-3.png"
+  ];
+
+  // State hook for randomly chosen image URL
+  const [randomImage, setRandomImage] = useState('');
+
+  // Function to pick a random image URL
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * contactImages.length);
+    return contactImages[randomIndex];
+  };
+
+  // Set random image URL on component mount
+  useEffect(() => {
+    setRandomImage(getRandomImage());
+  }, []); // Empty dependency array ensures this effect runs only once on mount
+
+  // Handle form updates
   const onFormUpdate = (category, value) => {
     setFormDetails({
       ...formDetails,
@@ -23,10 +47,11 @@ export const Contact = () => {
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setButtonText("Sending...");
-    
+
     const formData = new FormData();
     formData.append("firstName", formDetails.firstName);
     formData.append("lastName", formDetails.lastName);
@@ -63,7 +88,7 @@ export const Contact = () => {
           <Col size={12} md={6}>
             <TrackVisibility>
               {({ isVisible }) =>
-                <img className={isVisible ? "animate__animated animate__zoomIn" : ""} src={contactImg} alt="Contact Us"/>
+                <img className={isVisible ? "animate__animated animate__zoomIn" : ""} src={randomImage} alt="Contact Us"/>
               }
             </TrackVisibility>
           </Col>
@@ -105,5 +130,5 @@ export const Contact = () => {
         </Row>
       </Container>
     </section>
-  )
-}
+  );
+};

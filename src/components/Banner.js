@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import headerImg from "../assets/img/moonreaper.png";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
+
 
 export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
@@ -13,7 +13,7 @@ export const Banner = () => {
   const [index, setIndex] = useState(1);
   const toRotate = [ "Web Developer", "Web Designer"];
   const period = 2000;
-
+  const headerImg ="https://raw.githubusercontent.com/shan856/daily_news_project/main/uploads/moonreaper.png"
   useEffect(() => {
     let ticker = setInterval(() => {
       tick();
