@@ -557,39 +557,40 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 }
 
 /************ Projects Css ************/
-.contact {
+/* Keyframes for background images */.contact {
   padding: 60px 0 200px 0;
   position: relative;
   background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
-}
+  transition: background-image 0.5s ease; /* Smooth transition effect */
 
-.contact.bg-1 {
+  /* Default background image and position */
   background-image: url('https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/conatact-bg.jpg');
+  background-position: 57% center; /* Default position for larger screens */
 }
 
-.contact.bg-2 {
+.contact:focus-within {
+  /* Second image background and position when form is active */
   background-image: url('https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contactt.png');
+  background-position: 62% center; /* Position for the second image */
 }
 
-/* Responsive background image styles */
+.contact img {
+  max-width: 100%;
+  height: auto;
+}
+
 @media (max-width: 768px) {
-  .contact.bg-1,
-  .contact.bg-2 {
-    background-image: url("./assets/img/contactt.png");
-    background-position: 62%;
-    filter: saturate(160%);
+  .contact {
+    padding: 50px 0 180px 0; /* Adjusted padding for medium screens */
+    background-position: 57% center; /* Default position for medium screens */
   }
 }
 
 @media (max-width: 576px) {
-  .contact.bg-1,
-  .contact.bg-2 {
-    background-position: 62%t; 
-    background-image: url("./assets/img/contactt.png");
-    filter: saturate(160%);
-    /* padding: 40px 0 150px 0; Adjust padding for smaller screens */
+  .contact {
+    padding: 40px 0 150px 0; /* Adjusted padding for smaller screens */
+    background-position: 57% center; /* Default position for smaller screens */
   }
 }
 
@@ -598,6 +599,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   width: 92%;
   border-radius:59%; 
     animation: updown 3s linear infinite;
+  
   /* mix-blend-mode:luminosity; */
 }
 
