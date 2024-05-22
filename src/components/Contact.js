@@ -1,31 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 
+
 export const Contact = () => {
-  // Array of contact image URLs
-  const contactImages = [
-    "https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contact-1.png",
-    "https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contact-2.png",
-    "https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contact-3.png"
-  ];
-
-  // State hook for randomly chosen contact image URL
-  const [randomContactImage, setRandomContactImage] = useState('');
-
-  // Function to pick a random contact image URL
-  const getRandomContactImage = () => {
-    const randomIndex = Math.floor(Math.random() * contactImages.length);
-    return contactImages[randomIndex];
-  };
-
-  // Set random contact image URL on component mount and when contactImages changes
-  useEffect(() => {
-    setRandomContactImage(getRandomContactImage());
-  }, [contactImages]); // Re-run effect when contactImages changes
-
-  // Initial form state
   const formInitialDetails = {
     firstName: '',
     lastName: '',
@@ -34,12 +13,22 @@ export const Contact = () => {
     message: ''
   };
 
-  // State hooks for form details, button text, and status message
   const [formDetails, setFormDetails] = useState(formInitialDetails);
   const [buttonText, setButtonText] = useState('Send');
   const [status, setStatus] = useState({});
+  const [contactImage, setContactImage] = useState("https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contact-2.png");
+  const [fade, setFade] = useState(false); // State to trigger fade effect
 
-  // Handle form updates
+  const errorImages = [
+    "https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contact-error-6.png",
+    "https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contact-error-7.png"
+  ];
+
+  const getRandomErrorImage = () => {
+    const randomIndex = Math.floor(Math.random() * errorImages.length);
+    return errorImages[randomIndex];
+  };
+
   const onFormUpdate = (category, value) => {
     setFormDetails({
       ...formDetails,
@@ -47,14 +36,13 @@ export const Contact = () => {
     });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setButtonText("Sending...");
 
     const formData = new FormData();
     formData.append("firstName", formDetails.firstName);
-    formData.append("lastName", formDetails.lastName);
+    formData.append("lastName", formDetails.lastName);  
     formData.append("email", formDetails.email);
     formData.append("phone", formDetails.phone);
     formData.append("message", formDetails.message);
@@ -72,13 +60,24 @@ export const Contact = () => {
 
       if (result.success) {
         setStatus({ success: true, message: 'Message sent successfully' });
+        triggerFade("https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contact-1.png");
       } else {
         setStatus({ success: false, message: result.message });
+        triggerFade(getRandomErrorImage());
       }
     } catch (error) {
       setButtonText("Send");
       setStatus({ success: false, message: 'Something went wrong, please try again later.' });
+      triggerFade(getRandomErrorImage());
     }
+  };
+
+  const triggerFade = (newImage) => {
+    setFade(true);
+    setTimeout(() => {
+      setContactImage(newImage);
+      setFade(false);
+    }, 500); // This timeout should match the CSS transition duration
   };
 
   return (
@@ -88,7 +87,11 @@ export const Contact = () => {
           <Col size={12} md={6}>
             <TrackVisibility>
               {({ isVisible }) =>
-                <img className={isVisible ? "animate__animated animate__zoomIn" : ""} src={randomContactImage} alt="Contact Us" />
+                <img
+                  className={`contact-image ${isVisible ? "animate__animated animate__zoomIn" : ""} ${fade ? "fade" : ""}`}
+                  src={contactImage}
+                  alt="Contact Us"
+                />
               }
             </TrackVisibility>
           </Col>
@@ -100,19 +103,19 @@ export const Contact = () => {
                   <form onSubmit={handleSubmit}>
                     <Row>
                       <Col size={12} sm={6} className="px-1">
-                        <input type="text" value={formDetails.firstName} placeholder="First Name" onChange={(e) => onFormUpdate('firstName', e.target.value)} />
+                        <input type="text" value={formDetails.firstName} placeholder="First Name" onChange={(e) => onFormUpdate('firstName', e.target.value)} required/>
                       </Col>
                       <Col size={12} sm={6} className="px-1">
                         <input type="text" value={formDetails.lastName} placeholder="Last Name" onChange={(e) => onFormUpdate('lastName', e.target.value)} />
                       </Col>
                       <Col size={12} sm={6} className="px-1">
-                        <input type="email" value={formDetails.email} placeholder="Email Address" onChange={(e) => onFormUpdate('email', e.target.value)} />
+                        <input type="email" value={formDetails.email} placeholder="Email Address" onChange={(e) => onFormUpdate('email', e.target.value)} required/>
                       </Col>
                       <Col size={12} sm={6} className="px-1">
-                        <input type="tel" value={formDetails.phone} placeholder="Phone No." onChange={(e) => onFormUpdate('phone', e.target.value)} />
+                        <input type="tel" value={formDetails.phone} placeholder="Phone No." onChange={(e) => onFormUpdate('phone', e.target.value)} required/>
                       </Col>
                       <Col size={12} className="px-1">
-                        <textarea rows="6" value={formDetails.message} placeholder="Message" onChange={(e) => onFormUpdate('message', e.target.value)}></textarea>
+                        <textarea rows="6" value={formDetails.message} placeholder="Message" onChange={(e) => onFormUpdate('message', e.target.value)} required ></textarea>
                         <button type="submit"><span>{buttonText}</span></button>
                       </Col>
                       {
