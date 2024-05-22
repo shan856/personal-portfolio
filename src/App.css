@@ -597,7 +597,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 
 .contact img {
   width: 92%;
-  /* border-radius:59%;  */
+  border-radius:60%;
     animation: updown 3s linear infinite;
 
 }
