@@ -20,7 +20,7 @@ export const Contact = () => {
   const [fade, setFade] = useState(false); // State to trigger fade effect
 
   const errorImages = [
-    "https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contact-error-6.png",
+    "https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contact-error-8.png",
     "https://raw.githubusercontent.com/shan856/personal-portfolio/master/uploads/contact-error-7.png"
   ];
 
